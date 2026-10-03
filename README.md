@@ -1,5 +1,7 @@
 # TI-JEPA
 
+[Project page](https://oliverz-dot.github.io/ti-jepa-homepage/) · [checkpoints on Hugging Face](https://huggingface.co/TingheOliver/TI-JEPA-checkpoints)
+
 A single camera frame can't tell you how fast something is moving. No motion
 blur, no stroboscope, no speedometer overlay — just a snapshot of where
 things are. That's obviously true for a photo. It's also quietly true for
