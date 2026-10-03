@@ -134,8 +134,8 @@ python3 -m ti_jepa.eval.planning --env cartpole \
 ```
 
 Pretrained checkpoints for every arm — small-CNN and official ViT-Tiny +
-AdaLN scale, all three environments — are on the Hugging Face Hub:
-[**OliverZ-dot/ti-jepa-checkpoints**](https://huggingface.co/OliverZ-dot/ti-jepa-checkpoints).
+AdaLN scale, all three environments, two seeds — are on the Hugging Face Hub:
+[**TingheOliver/TI-JEPA-checkpoints**](https://huggingface.co/TingheOliver/TI-JEPA-checkpoints).
 
 Want the official-scale (ViT-Tiny/14 + AdaLN transformer) pipeline end to
 end, with the validated hyperparameter recipe baked in? That's
