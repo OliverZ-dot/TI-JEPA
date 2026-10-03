@@ -1,0 +1,15 @@
+torch>=2.0
+numpy
+scikit-learn
+scipy
+matplotlib
+Pillow
+einops
+h5py
+hdf5plugin
+transformers
+
+# Only needed for the real_pusht/ and real_reacher/ scripts, which evaluate
+# against the official LeWM checkpoints and datasets (not included here):
+#   - stable_worldmodel (the official codebase; set LEWM_REPO to its path)
+#   - the official pusht_expert_train.h5 / dmc/reacher_random.h5 datasets

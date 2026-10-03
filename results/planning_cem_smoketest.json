@@ -1,0 +1,173 @@
+{
+  "summary": {
+    "oracle_cem": {
+      "mean_final_dist": 0.018248762557050213,
+      "success_rate": 1.0,
+      "n": 4
+    },
+    "baseline_cem": {
+      "mean_final_dist": 0.2647719569504261,
+      "success_rate": 0.0,
+      "n": 4
+    },
+    "tijepa_cem": {
+      "mean_final_dist": 0.3683822900056839,
+      "success_rate": 0.0,
+      "n": 4
+    },
+    "zero_action": {
+      "mean_final_dist": 0.4558311477303505,
+      "success_rate": 0.0,
+      "n": 4
+    },
+    "random": {
+      "mean_final_dist": 0.38466499000787735,
+      "success_rate": 0.0,
+      "n": 4
+    },
+    "config": {
+      "n_tasks": 4,
+      "horizon": 8,
+      "n_samples": 128,
+      "n_iters": 4,
+      "success_thresh": 0.05
+    },
+    "closed_loop_mpc": {
+      "oracle_mpc": {
+        "mean_final_dist": 0.08687425032258034,
+        "success_rate": 0.0,
+        "n": 4
+      },
+      "baseline_mpc": {
+        "mean_final_dist": 0.14237210154533386,
+        "success_rate": 0.25,
+        "n": 4
+      },
+      "tijepa_mpc": {
+        "mean_final_dist": 0.1778089851140976,
+        "success_rate": 0.0,
+        "n": 4
+      },
+      "config": {
+        "mpc_horizon": 4,
+        "mpc_total_steps": 10
+      }
+    }
+  },
+  "results": {
+    "oracle_cem": {
+      "final_dist": [
+        0.0009113777196034789,
+        0.022518258541822433,
+        0.02267524041235447,
+        0.02689017355442047
+      ],
+      "success": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "baseline_cem": {
+      "final_dist": [
+        0.0717066079378128,
+        0.2574189305305481,
+        0.37466979026794434,
+        0.35529249906539917
+      ],
+      "success": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "tijepa_cem": {
+      "final_dist": [
+        0.3153562545776367,
+        0.48381638526916504,
+        0.4181360602378845,
+        0.2562204599380493
+      ],
+      "success": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "zero_action": {
+      "final_dist": [
+        0.34371381998062134,
+        0.561699390411377,
+        0.37010160088539124,
+        0.5478097796440125
+      ],
+      "success": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "random": {
+      "final_dist": [
+        0.25688934326171875,
+        0.4126453399658203,
+        0.5364604592323303,
+        0.33266481757164
+      ],
+      "success": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "_mpc_raw": {
+      "oracle_mpc": {
+        "final_dist": [
+          0.09490437060594559,
+          0.08299329876899719,
+          0.0832403227686882,
+          0.08635900914669037
+        ],
+        "success": [
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "baseline_mpc": {
+        "final_dist": [
+          0.03486121445894241,
+          0.10229580849409103,
+          0.16355910897254944,
+          0.26877227425575256
+        ],
+        "success": [
+          true,
+          false,
+          false,
+          false
+        ]
+      },
+      "tijepa_mpc": {
+        "final_dist": [
+          0.06501971185207367,
+          0.08943347632884979,
+          0.3121190369129181,
+          0.24466371536254883
+        ],
+        "success": [
+          false,
+          false,
+          false,
+          false
+        ]
+      }
+    }
+  }
+}
