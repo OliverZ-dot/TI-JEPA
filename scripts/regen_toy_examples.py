@@ -48,13 +48,36 @@ CKPTS = {
     "inertia_ball": dict(baseline_k1="checkpoints/baseline_k1.pt", tijepa="checkpoints/tijepa.pt"),
 }
 
-# Known-good (seed, speed_range) picked for a clean, visible divergence --
-# same values already used for the homepage's looping GIFs in make_demo_gifs.py.
-SEED_CFG = {
-    "pendulum": dict(seed=5, speed_range=(1.2, 2.0)),
-    "cartpole": dict(seed=7, speed_range=(1.0, 1.8)),
-    "inertia_ball": dict(seed=3, speed_range=(0.6, 0.9)),
-}
+# Same speed range + seed + "try a few, keep the largest-divergence pair"
+# selection as the paper's own publication figure (scripts/make_pretty_kill_
+# figure.py's defaults: speed_lo=0.05, speed_hi=0.10, seed=13, pick_example
+# n_tries=12). Reusing this exactly -- not the much faster speed_range used
+# by make_demo_gifs.py's looping GIFs, which was deliberately exaggerated
+# for a punchy animation and produces multiple pendulum swings inside one
+# horizon (a real but visually jittery trajectory) -- is what gives a clean
+# single-arc curve shape that matches the "beautiful" paper figures.
+SPEED_RANGE = (0.05, 0.10)
+SEED = 13
+N_TRIES = 12
+
+
+def pick_example(env_name, model_cfg, rng, k_ctx, horizon, action_dim):
+    """Same selection as make_pretty_kill_figure.py's pick_example: sample
+    a few candidate (q, v1) pairs, keep the one with the largest real
+    ground-truth branch separation. Purely picks which real initial
+    condition to show; every candidate and the winner are real physics,
+    nothing is fabricated."""
+    spec = get_env_spec(env_name)
+    env = spec.env_cls(model_cfg)
+    best = None
+    for _ in range(N_TRIES):
+        q, v1 = sample_qv1(env_name, rng, model_cfg, k_ctx, horizon, SPEED_RANGE)
+        gt1, _ = rollout_ground_truth(env, q, v1, horizon, action_dim)
+        gt2, _ = rollout_ground_truth(env, q, -v1, horizon, action_dim)
+        sep = float(np.linalg.norm(gt1[-1] - gt2[-1]))
+        if best is None or sep > best[0]:
+            best = (sep, q, v1)
+    return best[1], best[2]
 
 
 def render_branch_frames(display_env, q, v, horizon, action_dim):
@@ -91,9 +114,8 @@ def regen_one(env_name, device="cpu"):
     display_cfg = make_scaled_config(env_name, DISPLAY_SIZE)
     display_env = spec.env_cls(display_cfg)
 
-    sc = SEED_CFG[env_name]
-    rng = np.random.default_rng(sc["seed"])
-    q, v1 = sample_qv1(env_name, rng, model_cfg, k=max(kt, 1), horizon=HORIZON, speed_range=sc["speed_range"])
+    rng = np.random.default_rng(SEED)
+    q, v1 = pick_example(env_name, model_cfg, rng, max(kt, 1), HORIZON, action_dim)
     v2 = -v1
 
     # ---- ground truth: real physics + real render(), full horizon, both branches ----
